@@ -54,7 +54,7 @@ public class File_objectDAOImpl implements File_objectDAO{
 		if (file_object_Map.containsKey(filename)) {
 			return file_object_Map.get(filename);
 		} else {
-			throw new file_objectException("Entered filename " + filename + " doesnt exist");
+			return null;
 		}
 	}
 

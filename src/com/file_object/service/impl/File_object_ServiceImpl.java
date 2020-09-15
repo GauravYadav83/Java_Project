@@ -17,6 +17,9 @@ public class File_object_ServiceImpl implements File_object_Service{
 		if(!isValidName(file.getFilename())){
 			throw new file_objectException("Entered name "+file.getFilename()+" is invalid");
 		}
+		if(dao.findFile_object(file.getFilename())!=null) {
+			throw new file_objectException("Entered file "+file.getFilename()+" already exists");
+		}
 		File_object fo = dao.createFile_object(file);
 		return fo;
 	}
@@ -38,6 +41,9 @@ public class File_object_ServiceImpl implements File_object_Service{
 			throw new file_objectException("Entered name "+filename+" is invalid");
 		}
 		File_object fo = dao.findFile_object(filename);
+		if(fo==null) {
+			throw new file_objectException("Entered name "+filename+" doesn't exists");			
+		}
 		return fo;
 	}
 
