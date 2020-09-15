@@ -1,5 +1,11 @@
 package com.file_object.service.impl;
 
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import com.file_object.DAO.File_objectDAO;
@@ -21,6 +27,15 @@ public class File_object_ServiceImpl implements File_object_Service{
 			throw new file_objectException("Entered file "+file.getFilename()+" already exists");
 		}
 		File_object fo = dao.createFile_object(file);
+		try(FileOutputStream fos = new FileOutputStream(file.getFilename());
+            BufferedOutputStream bos = new BufferedOutputStream(fos)) {
+            byte[] bytes = file.getData().getBytes();
+            bos.write(bytes);
+            bos.close();
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 		return fo;
 	}
 
@@ -31,6 +46,14 @@ public class File_object_ServiceImpl implements File_object_Service{
 			throw new file_objectException("Entered name "+filename+" is invalid");
 		}
 		dao.deleteFile_object(filename);
+		Path path  = Paths.get("/home/gauravyadavprol/eclipse-workspace/Java_Project/"+filename); 
+
+	    try {
+	        Files.deleteIfExists(path); 
+	    } 
+	    catch (IOException e) {  
+	        e.printStackTrace(); 
+	    } 
 		
 	}
 

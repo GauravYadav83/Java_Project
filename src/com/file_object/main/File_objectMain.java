@@ -11,8 +11,8 @@ import com.file_object.service.impl.File_object_ServiceImpl;
 public class File_objectMain {
 
 	public static void main(String[] args) {
-		System.out.println("Welcome to Custom File Management App V1.0");
-		System.out.println("------------------------------------");
+		System.out.println("Welcome to Custom File Management System V1.0");
+		System.out.println("Author : Gaurav Yadav");
 		int ch = 0;
 		Scanner scanner = new Scanner(System.in);
 		File_object_Service service = new File_object_ServiceImpl();
@@ -85,7 +85,7 @@ public class File_objectMain {
 				break;
 				
 			default:
-				System.out.println("Entered choice is invalid it should be numbers between 1-4 only");
+				System.out.println("Entered choice is invalid it should be numbers between 1-5 only");
 				break;
 			
 			case 5:
